@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Νίκος Τσόφλιας | Πολιτισμική Τεχνολογία & Επικοινωνία</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#07091A;
+  --bg2:#0D1130;
+  --bg3:#111827;
+  --glass:rgba(255,255,255,0.04);
+  --glass-b:rgba(255,255,255,0.07);
+  --glass-h:rgba(255,255,255,0.09);
+  --border:rgba(255,255,255,0.08);
+  --border-a:rgba(99,102,241,0.4);
+  --purple:#6366F1;
+  --purple2:#818CF8;
+  --violet:#A78BFA;
+  --cyan:#67E8F9;
+  --mint:#6EE7B7;
+  --amber:#FBBF24;
+  --rose:#F472B6;
+  --text:#E2E8F0;
+  --soft:#94A3B8;
+  --muted:#475569;
+  --nav-w:72px;
+  --r:18px;
+  --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+
+html{scroll-behavior:smooth;scroll-padding-top:0}
+
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  line-height:1.6;
+}
+
+/* ── BLOBS ── */
+.blob-wrap{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(120px);opacity:.18;animation:drift 18s ease-in-out infinite alternate}
+.blob-1{width:700px;height:700px;background:radial-gradient(circle,#6366F1,#A78BFA);top:-200px;left:-200px;animation-delay:0s}
+.blob-2{width:600px;height:600px;background:radial-gradient(circle,#67E8F9,#6EE7B7);bottom:-150px;right:-150px;animation-delay:-6s}
+.blob-3{width:400px;height:400px;background:radial-gradient(circle,#F472B6,#FBBF24);top:40%;left:60%;animation-delay:-12s}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(40px,30px) scale(1.08)}}
+
+/* ── LANG TOGGLE ── */
+.lang-toggle{
+  position:fixed;top:20px;right:24px;z-index:200;
+  display:flex;gap:6px;
+  background:var(--glass-b);
+  border:1px solid var(--border);
+  backdrop-filter:blur(20px);
+  border-radius:100px;
+  padding:4px;
+}
+.lang-btn{
+  font-family:inherit;font-size:.75rem;font-weight:600;letter-spacing:.05em;
+  padding:5px 14px;border:none;border-radius:100px;cursor:pointer;
+  background:transparent;color:var(--soft);transition:var(--tr);
+}
+.lang-btn.active{
+  background:linear-gradient(135deg,var(--purple),var(--violet));
+  color:#fff;
+  box-shadow:0 0 16px rgba(99,102,241,.5);
+}
+
+/* ── SIDE NAV ── */
+.side-nav{
+  position:fixed;left:0;top:0;bottom:0;width:var(--nav-w);z-index:100;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  background:rgba(7,9,26,.8);
+  border-right:1px solid var(--border);
+  backdrop-filter:blur(24px);
+}
+.nav-mono{
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-size:.6rem;font-weight:700;letter-spacing:.2em;
+  color:var(--muted);text-transform:uppercase;
+  padding:16px 0;border-bottom:1px solid var(--border);margin-bottom:8px;
+}
+.nav-link{
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--soft);text-decoration:none;
+  padding:12px 6px;border-radius:8px;
+  transition:var(--tr);position:relative;
+}
+.nav-link::before{
+  content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:2px;height:0;
+  background:linear-gradient(180deg,var(--purple),var(--cyan));
+  border-radius:2px;transition:height .3s ease;
+}
+.nav-link:hover,.nav-link.active{color:var(--text)}
+.nav-link:hover::before,.nav-link.active::before{height:60%}
+
+/* ── MAIN WRAPPER ── */
+.ndiv{margin-left:var(--nav-w);position:relative;z-index:1}
+
+/* ── SECTIONS ── */
+.sec{
+  min-height:100vh;padding:100px 64px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.sec-lbl{
+  font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--purple2);margin-bottom:12px;
+}
+.sec-h{
+  font-size:clamp(2rem,4vw,3.5rem);font-weight:800;line-height:1.1;
+  background:linear-gradient(135deg,#fff 30%,var(--violet) 70%,var(--cyan) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:16px;
+}
+.sec-sub{
+  font-size:1rem;color:var(--soft);max-width:520px;line-height:1.7;
+  margin-bottom:48px;
+}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;padding:0 64px;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:64px;
+  position:relative;
+}
+.hero-photo-wrap{
+  position:relative;display:flex;align-items:center;justify-content:center;
+}
+.hero-photo-ring{
+  position:relative;
+  width:340px;height:340px;
+  border-radius:50%;
+  padding:3px;
+  background:linear-gradient(135deg,var(--purple),var(--cyan),var(--mint));
+  box-shadow:0 0 60px rgba(99,102,241,.4),0 0 120px rgba(103,232,249,.2);
+  animation:spin-ring 8s linear infinite;
+}
+@keyframes spin-ring{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.hero-photo-inner{
+  width:100%;height:100%;border-radius:50%;overflow:hidden;
+  background:var(--bg2);border:3px solid var(--bg);
+}
+.hero-photo-inner img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.hero-photo-glow{
+  position:absolute;inset:-20px;border-radius:50%;z-index:-1;
+  background:radial-gradient(circle,rgba(99,102,241,.3),transparent 70%);
+  filter:blur(30px);
+}
+.hero-content{display:flex;flex-direction:column;gap:20px}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);
+  border-radius:100px;padding:6px 16px;width:fit-content;
+}
+.hero-eyebrow span{font-size:.75rem;font-weight:600;color:var(--purple2);letter-spacing:.05em}
+.pulse-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--mint);
+  box-shadow:0 0 0 0 rgba(110,231,183,.4);
+  animation:pulse-glow 2s ease-in-out infinite;
+}
+@keyframes pulse-glow{
+  0%{box-shadow:0 0 0 0 rgba(110,231,183,.6)}
+  70%{box-shadow:0 0 0 10px rgba(110,231,183,0)}
+  100%{box-shadow:0 0 0 0 rgba(110,231,183,0)}
+}
+.hero-name{
+  font-size:clamp(2.5rem,5vw,4.5rem);font-weight:800;line-height:1;
+  background:linear-gradient(135deg,#fff 0%,var(--violet) 50%,var(--cyan) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  position:relative;
+}
+.hero-name::after{
+  content:attr(data-text);position:absolute;inset:0;
+  background:linear-gradient(135deg,#fff,var(--violet),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:blur(20px);opacity:.4;z-index:-1;
+}
+.hero-title{
+  font-size:1.1rem;font-weight:600;color:var(--violet);letter-spacing:.02em;
+}
+.hero-dept{font-size:.9rem;color:var(--soft)}
+.hero-desc{font-size:1rem;color:var(--soft);line-height:1.75;max-width:480px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{
+  font-size:.72rem;font-weight:600;letter-spacing:.05em;
+  padding:5px 12px;border-radius:100px;
+  border:1px solid var(--border-a);
+  background:rgba(99,102,241,.08);
+  color:var(--purple2);
+  transition:var(--tr);cursor:default;
+}
+.tag:hover{
+  background:rgba(99,102,241,.18);
+  border-color:var(--purple);
+  box-shadow:0 0 16px rgba(99,102,241,.3);
+}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.btn-p,.btn-o{
+  font-family:inherit;font-size:.85rem;font-weight:600;
+  padding:12px 28px;border-radius:100px;cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  transition:var(--tr);border:none;
+}
+.btn-p{
+  background:linear-gradient(135deg,var(--purple),var(--violet));
+  color:#fff;
+  box-shadow:0 4px 24px rgba(99,102,241,.4);
+}
+.btn-p:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(99,102,241,.6);
+}
+.btn-o{
+  background:transparent;color:var(--text);
+  border:1px solid var(--border-a);
+  backdrop-filter:blur(8px);
+}
+.btn-o:hover{
+  background:var(--glass-b);border-color:var(--purple);
+  transform:translateY(-2px);
+  box-shadow:0 4px 16px rgba(99,102,241,.2);
+}
+.hero-loc{
+  display:flex;align-items:center;gap:6px;
+  font-size:.8rem;color:var(--muted);margin-top:4px;
+}
+.hero-loc svg{color:var(--cyan)}
+.scroll-hint{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;
+}
+.scroll-hint-line{
+  width:1px;height:48px;
+  background:linear-gradient(180deg,var(--purple),transparent);
+  animation:scroll-bounce 2s ease-in-out infinite;
+}
+@keyframes scroll-bounce{0%,100%{opacity:.4;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ── GLASS CARD ── */
+.glass-card{
+  background:var(--glass);
+  border:1px solid var(--border);
+  backdrop-filter:blur(24px);
+  border-radius:var(--r);
+  transition:var(--tr);
+}
+.glass-card:hover{
+  background:var(--glass-h);
+  border-color:rgba(99,102,241,.25);
+  transform:translateY(-4px);
+  box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 30px rgba(99,102,241,.15);
+}
+
+/* ── ABOUT ── */
+.about-grid{
+  display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start;
+}
+.about-text p{
+  font-size:1rem;color:var(--soft);line-height:1.8;margin-bottom:16px;
+}
+.about-text p strong{color:var(--text)}
+.stats-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+.s-card{
+  padding:24px;border-radius:16px;text-align:center;
+  background:var(--glass);border:1px solid var(--border);
+  backdrop-filter:blur(20px);transition:var(--tr);
+}
+.s-card:hover{
+  border-color:var(--border-a);
+  box-shadow:0 0 30px rgba(99,102,241,.15);
+  transform:translateY(-3px);
+}
+.s-num{
+  font-size:2.2rem;font-weight:800;
+  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:block;
+}
+.s-lbl{font-size:.75rem;color:var(--soft);font-weight:500;margin-top:4px;display:block}
+
+/* ── CERTS BAR ── */
+.certs-bar{
+  padding:40px 64px;
+  background:rgba(99,102,241,.05);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.c-title{
+  font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:20px;text-align:center;
+}
+.c-row{
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
+}
+.c-badge{
+  font-size:.78rem;font-weight:600;
+  padding:8px 18px;border-radius:100px;
+  background:var(--glass);border:1px solid var(--border);
+  color:var(--soft);transition:var(--tr);cursor:default;
+  backdrop-filter:blur(12px);
+}
+.c-badge:hover{
+  color:var(--text);border-color:var(--border-a);
+  background:rgba(99,102,241,.1);
+  box-shadow:0 0 16px rgba(99,102,241,.2);
+}
+
+/* ── STUDIES ── */
+.studies-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+}
+.study-card{
+  padding:32px;border-radius:var(--r);position:relative;overflow:hidden;
+}
+.study-card.featured{
+  background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(167,139,250,.1));
+  border:1px solid rgba(99,102,241,.3);
+  grid-column:span 2;
+  display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;
+}
+.study-card:not(.featured){
+  background:var(--glass);border:1px solid var(--border);
+  backdrop-filter:blur(20px);transition:var(--tr);
+}
+.study-card:not(.featured):hover{
+  border-color:rgba(103,232,249,.3);
+  box-shadow:0 0 40px rgba(103,232,249,.1);
+  transform:translateY(-4px);
+}
+.study-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--purple),var(--cyan));
+  opacity:0;transition:opacity .3s;
+}
+.study-card:hover::before,.study-card.featured::before{opacity:1}
+.study-badge{
+  display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 12px;border-radius:100px;margin-bottom:16px;
+}
+.study-badge.current{
+  background:rgba(110,231,183,.15);border:1px solid rgba(110,231,183,.4);color:var(--mint);
+}
+.study-badge.completed{
+  background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);color:var(--purple2);
+}
+.study-badge.ongoing{
+  background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);color:var(--amber);
+}
+.study-card h3{font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.study-card .study-uni{font-size:.85rem;color:var(--soft);margin-bottom:8px}
+.study-card .study-period{font-size:.75rem;color:var(--muted)}
+.study-icon{
+  width:64px;height:64px;border-radius:16px;
+  background:linear-gradient(135deg,var(--purple),var(--violet));
+  display:flex;align-items:center;justify-content:center;font-size:1.8rem;
+  box-shadow:0 8px 32px rgba(99,102,241,.4);flex-shrink:0;
+}
+
+/* ── MODULES / SKILLS ── */
+.modules-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.mod-card{
+  padding:28px;border-radius:var(--r);position:relative;overflow:hidden;
+  background:var(--glass);border:1px solid var(--border);
+  backdrop-filter:blur(20px);transition:var(--tr);cursor:default;
+}
+.mod-card:hover{
+  transform:translateY(-6px) rotateX(2deg);
+  border-color:var(--border-a);
+  box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 30px rgba(99,102,241,.2);
+}
+.mod-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(99,102,241,.06),rgba(103,232,249,.04));
+  opacity:0;transition:opacity .3s;pointer-events:none;border-radius:inherit;
+}
+.mod-card:hover::after{opacity:1}
+.mod-icon{
+  font-size:2rem;margin-bottom:16px;display:block;
+  filter:drop-shadow(0 0 8px rgba(99,102,241,.5));
+}
+.mod-card h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.mod-card p{font-size:.85rem;color:var(--soft);line-height:1.6}
+.mod-bar{
+  height:3px;border-radius:2px;margin-top:16px;
+  background:linear-gradient(90deg,var(--purple),var(--cyan));
+  width:0;transition:width 1s ease;
+}
+.mod-card:hover .mod-bar{width:100%}
+
+/* ── TIMELINE ── */
+.timeline{
+  position:relative;padding-left:40px;display:flex;flex-direction:column;gap:0;
+  max-width:800px;
+}
+.timeline::before{
+  content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(180deg,var(--purple),var(--cyan),transparent);
+}
+.t-item{
+  position:relative;padding:28px 0 28px 40px;
+  opacity:0;transform:translateX(-20px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.t-item.visible{opacity:1;transform:translateX(0)}
+.t-item::before{
+  content:'';position:absolute;left:-5px;top:36px;
+  width:10px;height:10px;border-radius:50%;
+  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  box-shadow:0 0 16px rgba(99,102,241,.6);
+}
+.t-year{
+  font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--purple2);margin-bottom:8px;
+}
+.t-role{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.t-org{font-size:.9rem;color:var(--cyan);font-weight:500;margin-bottom:10px}
+.t-desc{font-size:.88rem;color:var(--soft);line-height:1.7}
+.t-card{
+  background:var(--glass);border:1px solid var(--border);
+  backdrop-filter:blur(16px);border-radius:14px;
+  padding:20px 24px;transition:var(--tr);
+}
+.t-card:hover{
+  border-color:rgba(99,102,241,.3);
+  box-shadow:0 12px 40px rgba(0,0,0,.4),0 0 20px rgba(99,102,241,.1);
+}
+
+/* ── VISION ── */
+.vision-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;
+}
+.vision-box{
+  padding:32px;border-radius:var(--r);
+  background:var(--glass);border:1px solid var(--border);
+  backdrop-filter:blur(20px);transition:var(--tr);
+  position:relative;overflow:hidden;
+}
+.vision-box::before{
+  content:'';position:absolute;top:0;right:0;
+  width:120px;height:120px;border-radius:50%;
+  opacity:0;transition:opacity .3s;transform:translate(40px,-40px);
+}
+.vision-box:nth-child(1)::before{background:radial-gradient(circle,rgba(99,102,241,.3),transparent)}
+.vision-box:nth-child(2)::before{background:radial-gradient(circle,rgba(103,232,249,.3),transparent)}
+.vision-box:nth-child(3)::before{background:radial-gradient(circle,rgba(110,231,183,.3),transparent)}
+.vision-box:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.12)}
+.vision-box:hover::before{opacity:1}
+.v-icon{font-size:2.5rem;margin-bottom:16px;display:block}
+.v-title{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:10px}
+.v-text{font-size:.88rem;color:var(--soft);line-height:1.7}
+
+/* ── CONTACT ── */
+.contact-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  max-width:800px;
+}
+.c-item{
+  padding:28px 24px;border-radius:var(--r);text-align:center;
+  background:var(--glass);border:1px solid var(--border);
+  backdrop-filter:blur(20px);transition:var(--tr);
+  text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+.c-item:hover{
+  transform:translateY(-6px);
+  border-color:rgba(103,232,249,.3);
+  box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 30px rgba(103,232,249,.15);
+}
+.ci-icon{
+  width:52px;height:52px;border-radius:14px;
+  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  box-shadow:0 8px 24px rgba(99,102,241,.3);
+}
+.ci-lbl{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.ci-val{font-size:.9rem;font-weight:600;color:var(--text)}
+
+/* ── SHIMMER ── */
+@keyframes shimmer{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.shimmer{
+  background:linear-gradient(135deg,#fff 0%,var(--violet) 40%,var(--cyan) 60%,#fff 100%);
+  background-size:300% 300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 5s linear infinite;
+}
+
+/* ── FADE IN ── */
+.fi{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.fi.vis{opacity:1;transform:translateY(0)}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:rgba(99,102,241,.4);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--purple)}
+
+/* ── CANVAS ── */
+#hero-canvas{
+  position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5;
+}
+
+/* ── DIVIDER ── */
+.divider{
+  height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);
+  margin:0 64px;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  :root{--nav-w:0px}
+  .side-nav{display:none}
+  .ndiv{margin-left:0}
+  #hero{grid-template-columns:1fr;padding:80px 24px;text-align:center;gap:40px}
+  .hero-photo-wrap{order:-1}
+  .hero-photo-ring{width:220px;height:220px}
+  .hero-tags{justify-content:center}
+  .hero-cta{justify-content:center}
+  .sec{padding:80px 24px}
+  .about-grid{grid-template-columns:1fr}
+  .studies-grid{grid-template-columns:1fr}
+  .study-card.featured{grid-column:span 1;grid-template-columns:1fr}
+  .modules-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .certs-bar{padding:32px 24px}
+  .divider{margin:0 24px}
+}
+@media(max-width:540px){
+  .modules-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Blobs -->
+<div class="blob-wrap">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- Language Toggle -->
+<div class="lang-toggle" role="group" aria-label="Language selection">
+  <button class="lang-btn active" id="btn-el" onclick="setLang('el')" aria-pressed="true">ΕΛ</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')" aria-pressed="false">EN</button>
+</div>
+
+<!-- Side Navigation -->
+<nav class="side-nav" aria-label="Πλοήγηση">
+  <span class="nav-mono">NT</span>
+  <a href="#hero"    class="nav-link" data-el="Αρχή"      data-en="Home">Αρχή</a>
+  <a href="#about"   class="nav-link" data-el="Σχετικά"   data-en="About">Σχετικά</a>
+  <a href="#studies" class="nav-link" data-el="Σπουδές"   data-en="Studies">Σπουδές</a>
+  <a href="#modules" class="nav-link" data-el="Γνώσεις"   data-en="Skills">Γνώσεις</a>
+  <a href="#exp"     class="nav-link" data-el="Εμπειρία"  data-en="Experience">Εμπειρία</a>
+  <a href="#vision"  class="nav-link" data-el="Στόχοι"    data-en="Goals">Στόχοι</a>
+  <a href="#contact" class="nav-link" data-el="Επαφή"     data-en="Contact">Επαφή</a>
+</nav>
+
+<!-- Main Content -->
+<main class="ndiv">
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="pulse-dot" aria-hidden="true"></div>
+        <span data-el="Διαθέσιμος για συνεργασία" data-en="Open to collaboration">Διαθέσιμος για συνεργασία</span>
+      </div>
+
+      <h1 class="hero-name shimmer" data-text="Νίκος Τσόφλιας" data-el="Νίκος Τσόφλιας" data-en="Nikos Tsoflias">Νίκος Τσόφλιας</h1>
+
+      <p class="hero-title" data-el="Πολιτισμική Τεχνολογία & Επικοινωνία" data-en="Cultural Technology & Communication">
+        Πολιτισμική Τεχνολογία & Επικοινωνία
+      </p>
+      <p class="hero-dept" data-el="Πανεπιστήμιο Δυτικής Αττικής" data-en="University of West Attica">
+        Πανεπιστήμιο Δυτικής Αττικής
+      </p>
+
+      <p class="hero-desc" data-el="Μελετώ τη σχέση τεχνολογίας και πολιτισμού, εξερευνώ τα ψηφιακά μέσα και τη δημιουργική επικοινωνία. Παθιασμένος με την τεχνολογία AI και τον ψηφιακό μετασχηματισμό." data-en="I study the relationship between technology and culture, exploring digital media and creative communication. Passionate about AI technology and digital transformation.">
+        Μελετώ τη σχέση τεχνολογίας και πολιτισμού, εξερευνώ τα ψηφιακά μέσα και τη δημιουργική επικοινωνία. Παθιασμένος με την τεχνολογία AI και τον ψηφιακό μετασχηματισμό.
+      </p>
+
+      <div class="hero-tags" role="list">
+        <span class="tag" role="listitem" data-el="Ψηφιακά Μέσα" data-en="Digital Media">Ψηφιακά Μέσα</span>
+        <span class="tag" role="listitem" data-el="Τεχνολογία AI" data-en="AI Technology">Τεχνολογία AI</span>
+        <span class="tag" role="listitem" data-el="Πολιτισμός" data-en="Culture">Πολιτισμός</span>
+        <span class="tag" role="listitem" data-el="Επικοινωνία" data-en="Communication">Επικοινωνία</span>
+        <span class="tag" role="listitem" data-el="UX/UI" data-en="UX/UI">UX/UI</span>
+      </div>
+
+      <div class="hero-cta">
+        <a href="#contact" class="btn-p" data-el="Επικοινωνία" data-en="Get in Touch">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6 19.79 19.79 0 0 1 1.68 5a2 2 0 0 1 1.95-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 10a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Επικοινωνία
+        </a>
+        <a href="#studies" class="btn-o" data-el="Μαθαίνω περισσότερα" data-en="Learn More">
+          Μαθαίνω περισσότερα
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="hero-loc" aria-label="Τοποθεσία">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span data-el="Αθήνα, Ελλάδα" data-en="Athens, Greece">Αθήνα, Ελλάδα</span>
+      </div>
+    </div>
+
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-ring">
+        <div class="hero-photo-inner">
+          <!-- Replace src with your actual photo -->
+          <img id="hero-img" src="" alt="Νίκος Τσόφλιας"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#6366F1,#A78BFA);font-size:5rem;color:#fff;border-radius:50%;\'>NT</div>'">
+        </div>
+      </div>
+      <div class="hero-photo-glow" aria-hidden="true"></div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <span data-el="Κύλιση" data-en="Scroll">Κύλιση</span>
+      <div class="scroll-hint-line"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── ABOUT ── -->
+  <section id="about" class="sec">
+    <p class="sec-lbl fi" data-el="01 / Σχετικά με μένα" data-en="01 / About me">01 / Σχετικά με μένα</p>
+    <h2 class="sec-h fi" data-el="Ποιος είμαι" data-en="Who I am">Ποιος είμαι</h2>
+
+    <div class="about-grid fi">
+      <div class="about-text">
+        <p data-el="<strong>Φοιτητής Πολιτισμικής Τεχνολογίας</strong> στο Πανεπιστήμιο Δυτικής Αττικής, με βαθιά αγάπη για την τομή τεχνολογίας και ανθρώπινης δημιουργίας." data-en="<strong>Cultural Technology student</strong> at the University of West Attica, with a deep passion for the intersection of technology and human creativity.">
+          <strong>Φοιτητής Πολιτισμικής Τεχνολογίας</strong> στο Πανεπιστήμιο Δυτικής Αττικής, με βαθιά αγάπη για την τομή τεχνολογίας και ανθρώπινης δημιουργίας.
+        </p>
+        <p data-el="Εξερευνώ τον τρόπο που τα ψηφιακά εργαλεία αλλάζουν τον πολιτισμό και την επικοινωνία, ενώ παράλληλα ασχολούμαι με AI, web development και δημιουργικά media." data-en="I explore how digital tools transform culture and communication, while also engaging with AI, web development and creative media.">
+          Εξερευνώ τον τρόπο που τα ψηφιακά εργαλεία αλλάζουν τον πολιτισμό και την επικοινωνία, ενώ παράλληλα ασχολούμαι με AI, web development και δημιουργικά media.
+        </p>
+        <p data-el="Πιστεύω ότι η τεχνολογία πρέπει να είναι εργαλείο ενδυνάμωσης — προσβάσιμη, ανθρωποκεντρική και εμπνευσμένη από τον πολιτισμό." data-en="I believe technology should be an empowering tool — accessible, human-centered, and inspired by culture.">
+          Πιστεύω ότι η τεχνολογία πρέπει να είναι εργαλείο ενδυνάμωσης — προσβάσιμη, ανθρωποκεντρική και εμπνευσμένη από τον πολιτισμό.
+        </p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="s-card">
+          <span class="s-num">3+</span>
+          <span class="s-lbl" data-el="Χρόνια Σπουδών" data-en="Years of Studies">Χρόνια Σπουδών</span>
+        </div>
+        <div class="s-card">
+          <span class="s-num">10+</span>
+          <span class="s-lbl" data-el="Πιστοποιήσεις" data-en="Certifications">Πιστοποιήσεις</span>
+        </div>
+        <div class="s-card">
+          <span class="s-num">5+</span>
+          <span class="s-lbl" data-el="Έργα & Projects" data-en="Projects">Έργα & Projects</span>
+        </div>
+        <div class="s-card">
+          <span class="s-num">∞</span>
+          <span class="s-lbl" data-el="Περιέργεια" data-en="Curiosity">Περιέργεια</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CERTS BAR ── -->
+  <div class="certs-bar fi">
+    <p class="c-title" data-el="Πιστοποιήσεις & Εκπαίδευση" data-en="Certifications & Training">Πιστοποιήσεις & Εκπαίδευση</p>
+    <div class="c-row" role="list">
+      <span class="c-badge" role="listitem">Google Analytics</span>
+      <span class="c-badge" role="listitem">Meta Social Media</span>
+      <span class="c-badge" role="listitem">HubSpot Marketing</span>
+      <span class="c-badge" role="listitem">Canva Design</span>
+      <span class="c-badge" role="listitem">AI Fundamentals</span>
+      <span class="c-badge" role="listitem">Digital Marketing</span>
+      <span class="c-badge" role="listitem">Content Creation</span>
+      <span class="c-badge" role="listitem">SEO Basics</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── STUDIES ── -->
+  <section id="studies" class="sec">
+    <p class="sec-lbl fi" data-el="02 / Σπουδές" data-en="02 / Studies">02 / Σπουδές</p>
+    <h2 class="sec-h fi" data-el="Εκπαίδευση" data-en="Education">Εκπαίδευση</h2>
+    <p class="sec-sub fi" data-el="Ακαδημαϊκό υπόβαθρο και πεδία μελέτης που διαμορφώνουν την οπτική μου." data-en="Academic background and fields of study that shape my perspective.">
+      Ακαδημαϊκό υπόβαθρο και πεδία μελέτης που διαμορφώνουν την οπτική μου.
+    </p>
+
+    <div class="studies-grid fi">
+      <div class="study-card featured">
+        <div class="study-icon" aria-hidden="true">🎓</div>
+        <div>
+          <span class="study-badge current" data-el="Σε εξέλιξη" data-en="In Progress">Σε εξέλιξη</span>
+          <h3 data-el="Πολιτισμική Τεχνολογία & Επικοινωνία" data-en="Cultural Technology & Communication">
+            Πολιτισμική Τεχνολογία & Επικοινωνία
+          </h3>
+          <p class="study-uni" data-el="Πανεπιστήμιο Δυτικής Αττικής (ΠΑΔΑ)" data-en="University of West Attica (UNIWA)">
+            Πανεπιστήμιο Δυτικής Αττικής (ΠΑΔΑ)
+          </p>
+          <p class="study-period" data-el="2021 — Παρόν · Αθήνα" data-en="2021 — Present · Athens">2021 — Παρόν · Αθήνα</p>
+        </div>
+      </div>
+
+      <div class="study-card">
+        <span class="study-badge completed" data-el="Ολοκληρώθηκε" data-en="Completed">Ολοκληρώθηκε</span>
+        <h3 data-el="Γενικό Λύκειο" data-en="High School Diploma">Γενικό Λύκειο</h3>
+        <p class="study-uni" data-el="2ο ΓΕΛ Αθηνών" data-en="2nd High School of Athens">2ο ΓΕΛ Αθηνών</p>
+        <p class="study-period" data-el="2018 — 2021" data-en="2018 — 2021">2018 — 2021</p>
+      </div>
+
+      <div class="study-card">
+        <span class="study-badge ongoing" data-el="Συνεχιζόμενο" data-en="Ongoing">Συνεχιζόμενο</span>
+        <h3 data-el="Online Μαθήματα & MOOCs" data-en="Online Courses & MOOCs">Online Μαθήματα & MOOCs</h3>
+        <p class="study-uni" data-el="Coursera · edX · Google" data-en="Coursera · edX · Google">Coursera · edX · Google</p>
+        <p class="study-period" data-el="2022 — Παρόν" data-en="2022 — Present">2022 — Παρόν</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── MODULES / SKILLS ── -->
+  <section id="modules" class="sec">
+    <p class="sec-lbl fi" data-el="03 / Δεξιότητες" data-en="03 / Skills">03 / Δεξιότητες</p>
+    <h2 class="sec-h fi" data-el="Τι ξέρω να κάνω" data-en="What I can do">Τι ξέρω να κάνω</h2>
+    <p class="sec-sub fi" data-el="Ένας συνδυασμός δημιουργικών και τεχνικών δεξιοτήτων που αναπτύσσω συνεχώς." data-en="A blend of creative and technical skills I continuously develop.">
+      Ένας συνδυασμός δημιουργικών και τεχνικών δεξιοτήτων που αναπτύσσω συνεχώς.
+    </p>
+
+    <div class="modules-grid fi">
+      <div class="mod-card">
+        <span class="mod-icon" aria-hidden="true">🤖</span>
+        <h3 data-el="Τεχνολογία AI" data-en="AI Technology">Τεχνολογία AI</h3>
+        <p data-el="Εργαλεία τεχνητής νοημοσύνης, prompt engineering, RAG agents, LLMs και εφαρμογές AI στον πολιτισμό και επικοινωνία." data-en="AI tools, prompt engineering, RAG agents, LLMs and AI applications in culture and communication.">
+          Εργαλεία τεχνητής νοημοσύνης, prompt engineering, RAG agents, LLMs και εφαρμογές AI στον πολιτισμό και επικοινωνία.
+        </p>
+        <div class="mod-bar"></div>
+      </div>
+
+      <div class="mod-card">
+        <span class="mod-icon" aria-hidden="true">📱</span>
+        <h3 data-el="Ψηφιακή Επικοινωνία" data-en="Digital Communication">Ψηφιακή Επικοινωνία</h3>
+        <p data-el="Social media marketing, content strategy, storytelling, brand communication και ψηφιακά μέσα." data-en="Social media marketing, content strategy, storytelling, brand communication and digital media.">
+          Social media marketing, content strategy, storytelling, brand communication και ψηφιακά μέσα.
+        </p>
+        <div class="mod-bar"></div>
+      </div>
+
+      <div class="mod-card">
+        <span class="mod-icon" aria-hidden="true">🎨</span>
+        <h3 data-el="Δημιουργικός Σχεδιασμός" data-en="Creative Design">Δημιουργικός Σχεδιασμός</h3>
+        <p data-el="UI/UX design, Canva, Adobe suite, visual storytelling και δημιουργία ψηφιακού περιεχομένου." data-en="UI/UX design, Canva, Adobe suite, visual storytelling and digital content creation.">
+          UI/UX design, Canva, Adobe suite, visual storytelling και δημιουργία ψηφιακού περιεχομένου.
+        </p>
+        <div class="mod-bar"></div>
+      </div>
+
+      <div class="mod-card">
+        <span class="mod-icon" aria-hidden="true">💻</span>
+        <h3 data-el="Web Development" data-en="Web Development">Web Development</h3>
+        <p data-el="HTML, CSS, JavaScript βασικές γνώσεις. Python για AI εφαρμογές. Streamlit για data apps." data-en="HTML, CSS, JavaScript basics. Python for AI applications. Streamlit for data apps.">
+          HTML, CSS, JavaScript βασικές γνώσεις. Python για AI εφαρμογές. Streamlit για data apps.
+        </p>
+        <div class="mod-bar"></div>
+      </div>
+
+      <div class="mod-card">
+        <span class="mod-icon" aria-hidden="true">🏛️</span>
+        <h3 data-el="Πολιτισμικές Σπουδές" data-en="Cultural Studies">Πολιτισμικές Σπουδές</h3>
+        <p data-el="Ψηφιακός πολιτισμός, πολιτισμική κληρονομιά, μέσα επικοινωνίας και κοινωνική θεωρία των media." data-en="Digital culture, cultural heritage, communication media and social theory of media.">
+          Ψηφιακός πολιτισμός, πολιτισμική κληρονομιά, μέσα επικοινωνίας και κοινωνική θεωρία των media.
+        </p>
+        <div class="mod-bar"></div>
+      </div>
+
+      <div class="mod-card">
+        <span class="mod-icon" aria-hidden="true">📊</span>
+        <h3 data-el="Ανάλυση Δεδομένων" data-en="Data Analysis">Ανάλυση Δεδομένων</h3>
+        <p data-el="Google Analytics, data visualization, insights από ψηφιακά μέσα και κατανόηση μετρικών επικοινωνίας." data-en="Google Analytics, data visualization, digital media insights and understanding communication metrics.">
+          Google Analytics, data visualization, insights από ψηφιακά μέσα και κατανόηση μετρικών επικοινωνίας.
+        </p>
+        <div class="mod-bar"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── EXPERIENCE ── -->
+  <section id="exp" class="sec">
+    <p class="sec-lbl fi" data-el="04 / Εμπειρία" data-en="04 / Experience">04 / Εμπειρία</p>
+    <h2 class="sec-h fi" data-el="Εμπειρία & Projects" data-en="Experience & Projects">Εμπειρία & Projects</h2>
+    <p class="sec-sub fi" data-el="Πρακτική εμπειρία από εθελοντισμό, projects και δραστηριότητες." data-en="Hands-on experience from volunteering, projects, and activities.">
+      Πρακτική εμπειρία από εθελοντισμό, projects και δραστηριότητες.
+    </p>
+
+    <div class="timeline fi">
+      <div class="t-item">
+        <div class="t-card">
+          <p class="t-year">2024 — Παρόν</p>
+          <p class="t-role" data-el="AI Agent Developer" data-en="AI Agent Developer">AI Agent Developer</p>
+          <p class="t-org" data-el="Personal Projects / RAG Systems" data-en="Personal Projects / RAG Systems">Personal Projects / RAG Systems</p>
+          <p class="t-desc" data-el="Ανάπτυξη AI agents με Python, LangChain, Groq API. Δημιουργία RAG εφαρμογών για επεξεργασία εγγράφων και ερωτήσεων σε PDF." data-en="Developing AI agents with Python, LangChain, Groq API. Building RAG applications for document processing and PDF Q&A.">
+            Ανάπτυξη AI agents με Python, LangChain, Groq API. Δημιουργία RAG εφαρμογών για επεξεργασία εγγράφων και ερωτήσεων σε PDF.
+          </p>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-card">
+          <p class="t-year">2023 — 2024</p>
+          <p class="t-role" data-el="Ψηφιακός Δημιουργός Περιεχομένου" data-en="Digital Content Creator">Ψηφιακός Δημιουργός Περιεχομένου</p>
+          <p class="t-org" data-el="Ανεξάρτητα Projects" data-en="Independent Projects">Ανεξάρτητα Projects</p>
+          <p class="t-desc" data-el="Δημιουργία ψηφιακού περιεχομένου, social media posts, visual design και στρατηγικές digital marketing για διάφορα projects." data-en="Creating digital content, social media posts, visual design and digital marketing strategies for various projects.">
+            Δημιουργία ψηφιακού περιεχομένου, social media posts, visual design και στρατηγικές digital marketing για διάφορα projects.
+          </p>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-card">
+          <p class="t-year">2022 — 2023</p>
+          <p class="t-role" data-el="Εθελοντής Επικοινωνίας" data-en="Communication Volunteer">Εθελοντής Επικοινωνίας</p>
+          <p class="t-org" data-el="Πολιτιστικές Εκδηλώσεις" data-en="Cultural Events">Πολιτιστικές Εκδηλώσεις</p>
+          <p class="t-desc" data-el="Συμμετοχή σε πολιτιστικές εκδηλώσεις ως εθελοντής στον τομέα της επικοινωνίας, φωτογράφησης και digital presence." data-en="Participating in cultural events as a volunteer in communication, photography and digital presence.">
+            Συμμετοχή σε πολιτιστικές εκδηλώσεις ως εθελοντής στον τομέα της επικοινωνίας, φωτογράφησης και digital presence.
+          </p>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-card">
+          <p class="t-year">2021</p>
+          <p class="t-role" data-el="Είσοδος στην Τριτοβάθμια Εκπαίδευση" data-en="University Entrance">Είσοδος στην Τριτοβάθμια Εκπαίδευση</p>
+          <p class="t-org" data-el="Πανεπιστήμιο Δυτικής Αττικής" data-en="University of West Attica">Πανεπιστήμιο Δυτικής Αττικής</p>
+          <p class="t-desc" data-el="Εισαγωγή στο τμήμα Πολιτισμικής Τεχνολογίας & Επικοινωνίας. Ξεκίνημα της ακαδημαϊκής πορείας και ανακάλυψη νέων ψηφιακών εργαλείων." data-en="Entering the Department of Cultural Technology & Communication. Beginning the academic journey and discovering new digital tools.">
+            Εισαγωγή στο τμήμα Πολιτισμικής Τεχνολογίας & Επικοινωνίας. Ξεκίνημα της ακαδημαϊκής πορείας και ανακάλυψη νέων ψηφιακών εργαλείων.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── VISION ── -->
+  <section id="vision" class="sec">
+    <p class="sec-lbl fi" data-el="05 / Στόχοι" data-en="05 / Goals">05 / Στόχοι</p>
+    <h2 class="sec-h fi" data-el="Το όραμά μου" data-en="My Vision">Το όραμά μου</h2>
+    <p class="sec-sub fi" data-el="Πού θέλω να φτάσω και ποια είναι η αποστολή μου." data-en="Where I want to go and what my mission is.">
+      Πού θέλω να φτάσω και ποια είναι η αποστολή μου.
+    </p>
+
+    <div class="vision-grid fi">
+      <div class="vision-box">
+        <span class="v-icon" aria-hidden="true">🚀</span>
+        <h3 class="v-title" data-el="Καινοτομία στον Πολιτισμό" data-en="Cultural Innovation">Καινοτομία στον Πολιτισμό</h3>
+        <p class="v-text" data-el="Θέλω να χρησιμοποιώ τεχνολογία AI για να κάνω τον πολιτισμό πιο προσβάσιμο και να δημιουργώ νέες εμπειρίες επικοινωνίας." data-en="I want to use AI technology to make culture more accessible and create new communication experiences.">
+          Θέλω να χρησιμοποιώ τεχνολογία AI για να κάνω τον πολιτισμό πιο προσβάσιμο και να δημιουργώ νέες εμπειρίες επικοινωνίας.
+        </p>
+      </div>
+
+      <div class="vision-box">
+        <span class="v-icon" aria-hidden="true">🌐</span>
+        <h3 class="v-title" data-el="Ψηφιακός Μετασχηματισμός" data-en="Digital Transformation">Ψηφιακός Μετασχηματισμός</h3>
+        <p class="v-text" data-el="Να συμβάλω στον ψηφιακό μετασχηματισμό οργανισμών και θεσμών, βοηθώντας τους να επικοινωνούν αποτελεσματικά στη ψηφιακή εποχή." data-en="To contribute to the digital transformation of organizations and institutions, helping them communicate effectively in the digital age.">
+          Να συμβάλω στον ψηφιακό μετασχηματισμό οργανισμών και θεσμών, βοηθώντας τους να επικοινωνούν αποτελεσματικά στη ψηφιακή εποχή.
+        </p>
+      </div>
+
+      <div class="vision-box">
+        <span class="v-icon" aria-hidden="true">🎯</span>
+        <h3 class="v-title" data-el="Συνεχής Μάθηση" data-en="Continuous Learning">Συνεχής Μάθηση</h3>
+        <p class="v-text" data-el="Να παραμένω πάντα σε επαφή με τις τελευταίες εξελίξεις στην AI, τα media και τον ψηφιακό σχεδιασμό — γιατί ο κόσμος αλλάζει γρήγορα." data-en="To always stay in touch with the latest developments in AI, media and digital design — because the world changes fast.">
+          Να παραμένω πάντα σε επαφή με τις τελευταίες εξελίξεις στην AI, τα media και τον ψηφιακό σχεδιασμό — γιατί ο κόσμος αλλάζει γρήγορα.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact" class="sec">
+    <p class="sec-lbl fi" data-el="06 / Επαφή" data-en="06 / Contact">06 / Επαφή</p>
+    <h2 class="sec-h fi" data-el="Ας μιλήσουμε" data-en="Let's talk">Ας μιλήσουμε</h2>
+    <p class="sec-sub fi" data-el="Είμαι ανοιχτός σε νέες ευκαιρίες, συνεργασίες και ενδιαφέρουσες συζητήσεις." data-en="I'm open to new opportunities, collaborations and interesting conversations.">
+      Είμαι ανοιχτός σε νέες ευκαιρίες, συνεργασίες και ενδιαφέρουσες συζητήσεις.
+    </p>
+
+    <div class="contact-grid fi">
+      <a href="mailto:tsofliasnikos@gmail.com" class="c-item glass-card">
+        <div class="ci-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <span class="ci-lbl" data-el="Email" data-en="Email">Email</span>
+        <span class="ci-val">tsofliasnikos@gmail.com</span>
+      </a>
+
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="c-item glass-card">
+        <div class="ci-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </div>
+        <span class="ci-lbl">LinkedIn</span>
+        <span class="ci-val" data-el="Σύνδεση" data-en="Connect">Σύνδεση</span>
+      </a>
+
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="c-item glass-card">
+        <div class="ci-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </div>
+        <span class="ci-lbl">GitHub</span>
+        <span class="ci-val" data-el="Projects" data-en="Projects">Projects</span>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <p style="margin-top:80px;font-size:.75rem;color:var(--muted);text-align:center">
+      <span data-el="Σχεδιάστηκε με" data-en="Designed with">Σχεδιάστηκε με</span>
+      <span style="color:var(--rose)"> ♥ </span>
+      <span data-el="στην Αθήνα · 2025" data-en="in Athens · 2025">στην Αθήνα · 2025</span>
+    </p>
+  </section>
+
+</main>
+
+<script>
+// ── CANVAS PARTICLE ANIMATION ──
+(function(){
+  const canvas = document.getElementById('hero-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [], raf;
+
+  function resize(){
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  class Particle{
+    constructor(){this.reset()}
+    reset(){
+      this.x = Math.random()*W;
+      this.y = Math.random()*H;
+      this.r = Math.random()*2+.5;
+      this.vx = (Math.random()-.5)*.4;
+      this.vy = (Math.random()-.5)*.4;
+      this.a = Math.random()*.6+.1;
+      this.colors = ['#6366F1','#A78BFA','#67E8F9','#6EE7B7','#F472B6'];
+      this.c = this.colors[Math.floor(Math.random()*this.colors.length)];
+    }
+    update(){
+      this.x+=this.vx; this.y+=this.vy;
+      if(this.x<0||this.x>W||this.y<0||this.y>H) this.reset();
+    }
+    draw(){
+      ctx.save();
+      ctx.globalAlpha=this.a;
+      ctx.fillStyle=this.c;
+      ctx.shadowColor=this.c;
+      ctx.shadowBlur=8;
+      ctx.beginPath();
+      ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  function init(){
+    resize();
+    particles=[];
+    const count = Math.min(Math.floor(W*H/8000),120);
+    for(let i=0;i<count;i++) particles.push(new Particle());
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    // draw connection lines
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x;
+        const dy=particles[i].y-particles[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<120){
+          ctx.save();
+          ctx.globalAlpha=(1-dist/120)*.12;
+          ctx.strokeStyle=particles[i].c;
+          ctx.lineWidth=.5;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+    }
+    particles.forEach(p=>{p.update();p.draw();});
+    raf = requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize',()=>{
+    cancelAnimationFrame(raf);
+    init();
+    draw();
+  });
+
+  init();
+  draw();
+})();
+
+// ── LANGUAGE TOGGLE ──
+let currentLang = 'el';
+
+function setLang(lang){
+  currentLang = lang;
+  document.querySelectorAll('[data-el]').forEach(el=>{
+    const txt = lang==='el' ? el.getAttribute('data-el') : el.getAttribute('data-en');
+    if(el.tagName==='INPUT'||el.tagName==='TEXTAREA') el.placeholder=txt;
+    else el.innerHTML=txt;
+  });
+  document.getElementById('btn-el').classList.toggle('active', lang==='el');
+  document.getElementById('btn-el').setAttribute('aria-pressed', lang==='el');
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-en').setAttribute('aria-pressed', lang==='en');
+  document.documentElement.lang = lang;
+}
+
+// ── SCROLL FADE IN ──
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('vis');
+  });
+},{threshold:.12});
+
+document.querySelectorAll('.fi').forEach(el=>observer.observe(el));
+
+// ── TIMELINE ANIMATION ──
+const tObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'),
+        Array.from(document.querySelectorAll('.t-item')).indexOf(e.target)*120);
+    }
+  });
+},{threshold:.2});
+
+document.querySelectorAll('.t-item').forEach(el=>tObserver.observe(el));
+
+// ── ACTIVE NAV ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+const sObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(l=>{
+        l.classList.toggle('active', l.getAttribute('href')==='#'+e.target.id);
+      });
+    }
+  });
+},{rootMargin:'-40% 0px -55% 0px'});
+
+sections.forEach(s=>sObserver.observe(s));
+</script>
+</body>
+</html>
